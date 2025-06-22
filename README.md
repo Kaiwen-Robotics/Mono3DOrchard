@@ -10,9 +10,9 @@
     <a href="https://www.ipb.uni-bonn.de/people/federico-magistri/index.html"><strong>Federico Magistri</strong></a>
     ·
     <a href="https://www.wur.nl/nl/personen/lammert-kooistra.htm"><strong>Lammert Kooistra</strong></a>
-    .
+    ·
     <a href="https://www.ipb.uni-bonn.de/people/cyrill-stachniss/index.html"><strong>Cyrill Stachniss</strong></a>
-    .
+    ·
     <a href=""><strong>Wensheng Wang</strong></a>
     ·
     <a href="https://www.joao-valente.com/doku.php?id=home"><strong>João Valente</strong></a>
