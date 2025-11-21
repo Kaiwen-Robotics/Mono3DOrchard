@@ -56,3 +56,64 @@ pip install torch torchvision torchaudio
 pip install -e .
 pip install --no-build-isolation -e grounding_dino
 ```
+
+### 3. Install 3D shape completion dependencies
+Set up a new conda environment and install dependencies:
+```bash
+conda create -n Mono3D python=3.8 -y
+conda activate Mono3D
+conda install pytorch==2.0.0 torchvision==0.15.1 torchaudio==2.0.0 pytorch-cuda=11.7 -c pytorch -c nvidia -y
+pip install open3d==0.17 opencv-python scikit-image wandb tqdm plyfile
+```
+
+## Usage
+### 1. Download the dataset
+Download the dataset from https://zenodo.org/records/15635995 and create a Data directory. Unzip it to the data directory of this repository.
+
+### 2. Process the videos to frames
+Run the following script to extract frames from the videos:
+```bash
+ffmpeg -i <video_path> -qscale:v 2 <output_frame_path>/frame_%05d.jpg
+```
+### 3. Run the framework with Grounded-SAM2 to track fruits and get masks
+Activate the GDSAM2 conda environment, change the path and text prompt in the script and run the following command:
+```bash
+cd Grounded-SAM2
+conda activate GDSAM2
+python grounded_sam2_tracking_demo_with_continuous_id_gd1.5.py
+```
+### 4. Run SfM in Metashape to get camera poses and depth maps
+Import the extracted frames into Metashape and run the SfM pipeline to get camera poses and depth maps. Export the camera poses as a xml file. Export depth maps as 1 band 32-bit float tiff images.
+
+### 5. Dataset preparation for 3D shape completion
+First change the input and output paths in the script `scripts/Metashape_Camera_Pose.py`. Run the script to convert the camera poses from xml to txt format:
+```bash
+conda activate Mono3D
+python scripts/Metashape_Camera_Pose.py
+```
+Then, change the input and output paths in the script `scripts/DatasetProcess.py` and run the script to prepare the dataset for 3D shape completion:
+```bash
+python scripts/DatasetProcess.py
+```
+### 6. Train a DeepSDF model, and run 3D shape completion
+Follow the instructions in the DeepSDF repository to train a DeepSDF model on the training set.
+Link to DeepSDF repository: https://github.com/facebookresearch/DeepSDF
+After training the DeepSDF model, change the data_dir path in the config file `configs/shape_completion_challenge_apple.yaml` to the prepared dataset path. Then run the following command to perform 3D shape completion on the field environment apple dataset:
+```bash
+python run_shape_completion.py --config configs/shape_completion_challenge_apple.yaml
+```
+
+
+## Citation
+If you find this work useful in your research, please cite our paper.
+```bibtex
+@article{wang2026uav,
+  title={UAV-based monocular 3D panoptic mapping for fruit shape completion in orchard},
+  author={Wang, Kaiwen and Pan, Yue and Magistri, Federico and Kooistra, Lammert and Stachniss, Cyrill and Wang, Wensheng and Valente, Jo{\~a}o},
+  journal={ISPRS Journal of Photogrammetry and Remote Sensing},
+  volume={231},
+  pages={608--621},
+  year={2026},
+  publisher={Elsevier}
+}
+```
