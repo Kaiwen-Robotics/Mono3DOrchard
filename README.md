@@ -24,5 +24,10 @@
 ----
 ![image](https://github.com/Kaiwen-Robotics/Mono3DOrchard/blob/main/Figs/Visualization.png)
 ----
+
+## Dataset
+The dataset used in this work is available at: https://zenodo.org/records/15635995
+The dataset includes RGB videos in four differnt flight modes in real orchards and coresponding ground truth fruit diameters, and 3D fruit models collected with high accuracy 3D scanner in a controlled lab environment.
+
 ## Installation
 
