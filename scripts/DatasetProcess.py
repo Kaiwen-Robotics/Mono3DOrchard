@@ -112,7 +112,6 @@ jpg_dir = ""
 json_dir = ""
 npy_dir = ""
 tif_dir = ""
-# tif_dir = "I:\\PhD-Kaiwen\\Third_Chapter\\Metashape\\Task1_Ultrahigh_3fps_depth\\grayscale8bit\\"
 txt_dir = ""
 
 # Output directory for the dataset

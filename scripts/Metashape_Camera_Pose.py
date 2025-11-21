@@ -3,8 +3,8 @@ import os
 import numpy as np
 
 # Path to your cameras.xml file
-xml_path = '../Task1_withRef/cameras.xml'
-output_dir = '../Task1_withRef/CameraPose/poses_output'  # directory to save output text files
+xml_path = '../cameras.xml'
+output_dir = '../poses_output'  # directory to save output text files
 os.makedirs(output_dir, exist_ok=True)
 
 # Parse the XML
